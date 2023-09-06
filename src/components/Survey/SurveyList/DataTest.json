@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "id": 5,
+            "accessToken": "5632a4d7-48cf-4d25-8c52-2174d58cf50b",
+            "title": {
+                "en_US": "Furniture Creation Certification"
+            },
+            "description": {
+                "en_US": "<p>Test your furniture knowledge!</p>"
+            },
+            "attemptsLimit": 3
+        },
+        {
+            "id": 2,
+            "accessToken": "4ead4bc8-b8f2-4760-a682-1fde8ddb95ac",
+            "title": {
+                "en_US": "MyCompany Vendor Certification"
+            },
+            "description": {
+                "en_US": "<p>Test your vendor skills!</p>"
+            },
+            "attemptsLimit": 2
+        },
+        {
+            "id": 1,
+            "accessToken": "b135640d-14d4-4748-9ef6-344ca256531e",
+            "title": {
+                "en_US": "Feedback Form"
+            },
+            "description": {
+                "en_US": "<p>This survey allows you to give a feedback about your experience with our products.\n    Filling it helps us improving your experience.</p>"
+            },
+            "attemptsLimit": 1
+        },
+        {
+            "id": 3,
+            "accessToken": "b137640d-9876-1234-abcd-344ca256531e",
+            "title": {
+                "en_US": "Quiz about our Company"
+            },
+            "description": {
+                "en_US": "<p>This small quiz will test your knowledge about our Company. Be prepared !</p>"
+            },
+            "attemptsLimit": 1
+        },
+        {
+            "id": 6,
+            "accessToken": "5ef0d238-2895-4404-9dff-c493eeefe4f6",
+            "title": {
+                "en_US": "Entrance test"
+            },
+            "description": null,
+            "attemptsLimit": 1
+        }
+    ],
+    "currentPage": 1,
+    "hasNextPage": false,
+    "totalRecord": 5
+}
