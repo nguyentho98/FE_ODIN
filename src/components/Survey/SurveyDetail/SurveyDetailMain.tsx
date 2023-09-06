@@ -9,14 +9,15 @@ import CourseSidebar from "./CourseSidebar"
 import jsonData from "./SurveyDetailDataTest.json"
 import { surveySelector } from "@/redux/Selector/surveySelector"
 import axios from "axios"
-
-const SurveyDetailMain: React.FC = () => {
+interface PropsSurvey {
+    idSurveyDetails:  string
+}
+const SurveyDetailMain: React.FC<PropsSurvey> = ({idSurveyDetails}) => {
     const userInfo = useSelector(userAuthSelector)
     const surveyInfo = useSelector(surveySelector)
     const [page, setPage] = useState<any>(1)
     const [question, setQuestion] = useState<any>()
 
-    console.log({ surveyInfo })
 
    
     return (
@@ -170,7 +171,7 @@ const SurveyDetailMain: React.FC = () => {
                     </div>
                     {/* right */}
                     <div className="col-xxl-4 col-xl-4 col-lg-4">
-                        <CourseSidebar data={surveyInfo} userInfo={userInfo}/>
+                        <CourseSidebar data={surveyInfo} userInfo={userInfo} idSurveyDetails={idSurveyDetails}/>
                     </div>
                 </div>
             </div>

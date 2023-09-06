@@ -23,6 +23,9 @@ const SurveyListMain: React.FC = () => {
         Authorization: `Bearer ${userInfo.token}`,
     }
     const handleClick = async (item: any) => {
+        console.log('====================================');
+        console.log("item", item);
+        console.log('====================================');
         dispatch(fetchSurveyData(item))
     }
     useEffect(() => {
@@ -88,7 +91,7 @@ const SurveyListMain: React.FC = () => {
                                                                 className="course__title course__title-3 pt-5"
                                                                 onClick={() => handleClick(item)}
                                                             >
-                                                                <Link href={`/survey/survey-details`}>
+                                                                <Link href={`/survey/survey-details/${item?.accessToken}`}>
                                                                     {item.title?.en_US}
                                                                 </Link>
                                                             </h3>

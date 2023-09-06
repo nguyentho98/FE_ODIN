@@ -7,22 +7,26 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import { useSelector } from "react-redux"
 
-export const StartTestMain: React.FC = () => {
+export const StartTestMain: React.FC<any> = ({params}) => {
+    console.log('====================================');
+    console.log("params", params?.slug);
+    console.log('====================================');
     const selectedExam = useSelector(inputExamSelector)
     const userInfo = useSelector(userAuthSelector)
     const router = useRouter()
     console.log(selectedExam)
     const handleStart = () => {
-        if (!selectedExam.answerToken || !selectedExam.accessToken) {
-            router.push("survey-list")
+        if(params && params?.slug.length < 1) {
+
+            return;
         }
         axios
             .patch(
-                `${process.env.NEXT_PUBLIC_API}/survey/begin/${selectedExam.accessToken}/${selectedExam.answerToken}`,
+                `${process.env.NEXT_PUBLIC_API}/survey/begin/${params?.slug[0]}/${params?.slug[1]}`,
                 {},
                 {
                     headers: {
-                        Authorization: `Bearer ${userInfo.token}`,
+                        Authorization: `Bearer ${localStorage.getItem("TOKEN")}`,
                     },
                 }
             )
@@ -30,8 +34,11 @@ export const StartTestMain: React.FC = () => {
                 const data = res.data
 
                 // start xong phai luu du lieu vao dau do chu?
+                console.log('====================================');
+                console.log("data",data);
+                console.log('====================================');
 
-                router.push("/survey/full-test")
+                router.push(`/survey/full-test/${data?.accessToken}/${data?.answerToken}`)
             })
             .catch((err) => {
                 console.log(err)

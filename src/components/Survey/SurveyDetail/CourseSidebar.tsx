@@ -2,26 +2,45 @@ import { AuthenticationUserState } from "@/constants/AuthenticationState"
 import { StartExam } from "@/redux/Slice/InputExam/InputExam"
 
 import { AppDispatch } from "@/redux/store"
+import axios from "axios"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import React from "react"
 import { useDispatch } from "react-redux"
 
 interface pageProps {
     data: any
     userInfo: AuthenticationUserState
+    idSurveyDetails: string
 }
 
-const CourseSidebar: React.FC<pageProps> = ({ data, userInfo }) => {
+const CourseSidebar: React.FC<pageProps> = ({ data, userInfo,idSurveyDetails }) => {
     console.log(data)
     console.log(userInfo)
-
+    console.log('====================================');
+    console.log("idSurveyDetails", idSurveyDetails);
+    console.log('====================================');
+    const router = useRouter()
     const dispatch = useDispatch<AppDispatch>()
-    const handleCreateInputExam = (accessToken: any) => {
-        const dataPush = {
-            accessToken,
-            userInfo,
-        }
-        dispatch(StartExam(dataPush))
+    const handleCreateInputExam =  async (accessToken: any) => {
+        const dataUser = JSON.parse(localStorage.getItem("USER") || '')
+        console.log('====================================');
+        console.log("dataUser",dataUser);
+        console.log('====================================');
+        const res = await axios.patch(
+            `${process.env.NEXT_PUBLIC_API}/survey/start/${idSurveyDetails}`,
+            {},
+            {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("TOKEN")}`,
+                },
+            }
+        )
+        console.log('====================================');
+        console.log("res", res);
+        console.log('====================================');
+        router.push(`/survey/start-test/${res.data.accessToken}/${res.data.answerToken}`)
+     
     }
     return (
         <div className="course__sidebar pl-70 p-relative">
@@ -98,13 +117,13 @@ const CourseSidebar: React.FC<pageProps> = ({ data, userInfo }) => {
         </a>
     </div> */}
                     <div className="course__enroll-btn">
-                        <Link
+                        <div
                             className="e-btn e-btn-7 w-100"
-                            href="/survey/start-test"
+                            href={``}
                             onClick={() => handleCreateInputExam(data.accessToken)}
                         >
                             Start Exam <i className="fas fa-arrow-right"></i>
-                        </Link>
+                        </div>
                     </div>
                 </div>
             </div>

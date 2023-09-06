@@ -11,7 +11,10 @@ import { inputExamSelector } from "@/redux/Selector/inputExamSelector"
 import { userAuthSelector } from "@/redux/Selector/userAuthorSelector"
 import { Question } from "@/constants/question.types"
 import { useRouter } from "next/navigation"
-const FullTest = () => {
+const FullTest: React.FC<any> = ({params}) => {
+    console.log('====================================');
+    console.log("params", params);
+    console.log('====================================');
     const selectedExam = useSelector(inputExamSelector)
 
     const userInfo = useSelector(userAuthSelector)
@@ -31,15 +34,15 @@ const FullTest = () => {
     const [isError, setIsError] = useState(false)
 
     useEffect(() => {
-        if (!selectedExam.answerToken || !selectedExam.accessToken) {
-            router.push("survey-list")
+        if(params && params.slug?.length < 0) {
+            return;
         }
         axios
             .get(
-                `${process.env.NEXT_PUBLIC_API}/survey/questions/${selectedExam.accessToken}/${selectedExam.answerToken}`,
+                `${process.env.NEXT_PUBLIC_API}/survey/questions/${params.slug[0]}/${params.slug[1]}`,
                 {
                     headers: {
-                        Authorization: `Bearer ${userInfo.token}`,
+                        Authorization: `Bearer ${localStorage.getItem("TOKEN")}`,
                     },
                 }
             )
@@ -52,9 +55,8 @@ const FullTest = () => {
                     return
                 }
                 data = data[0]
-                console.log("Data")
 
-                console.log(data)
+                console.log("NEXT_PUBLIC_API", data)
 
                 const sepcQuest = data.questions.filter((item: any) => {
                     return [SurveyQuestionType.ONLY_TITLE, SurveyQuestionType.AUDIO].includes(

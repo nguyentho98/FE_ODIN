@@ -46,19 +46,21 @@ const SignInMain: React.FC = () => {
                         progress: undefined,
                         theme: "light",
                     })
+                    localStorage.setItem("TOKEN", originalPromiseResult?.payload?.data?.token)
+                    localStorage.setItem("USER", JSON.stringify(originalPromiseResult?.payload?.data?.user))
                     router.back()
                     return
                 }
-                toast.error("Login Fail!", {
-                    position: "top-right",
-                    autoClose: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                })
+                // toast.error("Login Fail!", {
+                //     position: "top-right",
+                //     autoClose: 1000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     progress: undefined,
+                //     theme: "light",
+                // })
             }
         )
     }

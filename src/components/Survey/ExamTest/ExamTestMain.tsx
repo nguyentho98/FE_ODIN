@@ -17,9 +17,6 @@ const ExamTestMain: React.FC = () => {
         Authorization: `Bearer ${userInfo.token}`,
     }
     useEffect(() => {
-        if (!examTest.answerToken || !examTest.accessToken) {
-            route.push("survey-list")
-        }
         axios
             .get(`${process.env.NEXT_PUBLIC_API}/survey/5ef0d238-2895-4404-9dff-c493eeefe4f6?page=${page}`, {
                 headers: header,
